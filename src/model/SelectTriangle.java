@@ -1,0 +1,25 @@
+package model;
+
+import model.interfaces.OutlineSelectedStrategy;
+
+import java.awt.*;
+
+public class SelectTriangle implements OutlineSelectedStrategy {
+    public static void outlineSelectStrategy (Shape shape) {
+        Graphics2D graphics2d = shape.getPaintCanvas().getGraphics2D();
+        Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+        graphics2d.setStroke(stroke);
+        graphics2d.setColor(Color.BLACK);
+        int [] xValues = new int[3];
+        int [] yValues = new int[3];
+
+        xValues[0] = shape.getXMin();
+        xValues[1] = shape.getTriangleMidPoint();
+        xValues[2] = shape.getXMax();
+
+        yValues[0] = shape.getYMin();
+        yValues[1]= shape.getYMax();
+        yValues[2]= shape.getYMax();
+        graphics2d.drawPolygon(xValues, yValues, 3);
+    }
+}
